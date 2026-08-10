@@ -1,0 +1,27 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+#  ai:
+#    openai:
+#      api-key: ${OPENAI_API_KEY}
+
+management:
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    org.hibernate.SQL: debug

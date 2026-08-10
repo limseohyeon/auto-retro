@@ -1,0 +1,19 @@
+#테스
+spring:
+  application:
+    name: auto-retro
+
+  batch:
+    job:
+      enabled: false
+
+  jpa:
+    open-in-view: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info

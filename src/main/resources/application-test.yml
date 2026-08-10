@@ -1,0 +1,15 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  batch:
+    job:
+      enabled: false
+
+  jpa:
+    open-in-view: false
+
+logging:
+  level:
+    root: warn
