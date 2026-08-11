@@ -3,6 +3,9 @@ spring:
   application:
     name: auto-retro
 
+  modulith:
+    detection-strategy: explicitly-annotated
+
   batch:
     job:
       enabled: false
