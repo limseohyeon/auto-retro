@@ -10,6 +10,9 @@
   --color-primary-hover: #1d4ed8;
   --color-primary-soft: #eff6ff;
   --color-on-primary: #ffffff;
+  --color-danger: #dc2626;
+  --color-danger-hover: #b91c1c;
+  --color-danger-soft: #fef2f2;
 
   /* Size and spacing */
   --content-max-width: 1280px;
@@ -21,6 +24,7 @@
   --space-6: 24px;
   --space-8: 32px;
   --space-10: 40px;
+  --space-12: 48px;
 
   /* Shape */
   --radius-small: 4px;

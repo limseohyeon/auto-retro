@@ -1,0 +1,68 @@
+.status-state {
+  display: flex;
+  min-height: 240px;
+  padding: var(--space-12) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  background-color: var(--color-surface);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  text-align: center;
+}
+
+.status-state--error {
+  border-color: var(--color-danger);
+  background-color: var(--color-danger-soft);
+}
+
+.status-state__spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: status-state-spin 0.8s linear infinite;
+}
+
+.status-state__title {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: 20px;
+}
+
+.status-state__message {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.status-state__action {
+  margin-top: var(--space-2);
+}
+
+.status-state__retry-button {
+  margin-top: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border: 0;
+  border-radius: var(--radius-medium);
+  color: var(--color-on-primary);
+  background-color: var(--color-danger);
+  cursor: pointer;
+}
+
+.status-state__retry-button:hover {
+  background-color: var(--color-danger-hover);
+}
+
+@keyframes status-state-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-state__spinner {
+    animation: none;
+  }
+}
