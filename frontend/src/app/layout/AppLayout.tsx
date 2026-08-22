@@ -1,4 +1,5 @@
-import { Link, NavLink, Outlet } from 'react-router'
+import { Link, NavLink, Outlet, useNavigate } from 'react-router'
+import { useAuth } from '@/features/auth/model/useAuth'
 import './AppLayout.css'
 
 const navigationItems = [
@@ -8,6 +9,14 @@ const navigationItems = [
 ]
 
 export function AppLayout() {
+  const { userId, logout } = useAuth()
+  const navigate = useNavigate()
+
+  function handleLogout() {
+    logout()
+    navigate('/login', { replace: true })
+  }
+
   return (
     <div className="app-layout">
       <header className="app-header">
@@ -29,6 +38,13 @@ export function AppLayout() {
               </NavLink>
             ))}
           </nav>
+
+          <div className="app-user">
+            <span className="app-user__id">사용자 {userId}</span>
+            <button className="app-user__logout" type="button" onClick={handleLogout}>
+              로그아웃
+            </button>
+          </div>
         </div>
       </header>
 

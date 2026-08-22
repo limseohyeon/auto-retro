@@ -1,0 +1,11 @@
+.protected-route-status {
+  display: grid;
+  min-height: 100vh;
+  padding: var(--space-6) var(--space-4);
+  place-items: center;
+}
+
+.protected-route-status > * {
+  width: 100%;
+  max-width: 560px;
+}
