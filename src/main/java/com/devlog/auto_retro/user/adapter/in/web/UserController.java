@@ -7,19 +7,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.devlog.auto_retro.common.api.ApiResponse;
 import com.devlog.auto_retro.user.application.UserLookupService;
+import lombok.RequiredArgsConstructor;
 
 /**
  * 사용자 존재 여부를 확인하는 HTTP 진입점이다.
  */
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/users")
 public class UserController {
 
 	private final UserLookupService userLookupService;
-
-	public UserController(UserLookupService userLookupService) {
-		this.userLookupService = userLookupService;
-	}
 
 	@GetMapping("/{userId}")
 	public ApiResponse<UserResponse> findUser(@PathVariable long userId) {
