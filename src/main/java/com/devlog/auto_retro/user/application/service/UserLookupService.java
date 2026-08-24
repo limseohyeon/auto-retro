@@ -25,12 +25,11 @@ public class UserLookupService {
 			throw new BusinessException(CommonErrorCode.INVALID_INPUT);
 		}
 
-        String normalizedUserNm = userNm.trim();
+		String normalizedUserNm = userNm.trim();
 
-        return userLookupPort.findByUserNm(normalizedUserNm)
-            .orElseThrow(() ->
-                new BusinessException(UserErrorCode.USER_NOT_FOUND)
-            );
-
+		return userLookupPort.findByUserNm(normalizedUserNm)
+			.orElseThrow(() ->
+				new BusinessException(UserErrorCode.USER_NOT_FOUND)
+			);
 	}
 }

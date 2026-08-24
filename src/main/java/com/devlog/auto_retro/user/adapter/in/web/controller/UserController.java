@@ -22,7 +22,7 @@ public class UserController {
 
     @GetMapping("/{userNm}")
     public ApiResponse<UserResponse> findUserByUserNm(
-        @PathVariable String userNm
+        @PathVariable("userNm") String userNm
     ) {
         var userInfo = userLookupService.findByUserNm(userNm);
 

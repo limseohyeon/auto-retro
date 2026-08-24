@@ -34,7 +34,7 @@ export function LoginPage() {
         <div className="login-page__heading">
           <p className="login-page__brand">Auto Retro</p>
           <h1 id="login-title">사용자 확인</h1>
-          <p>DB에 등록된 사용자 ID를 입력해 주세요.</p>
+          <p>DB에 등록된 사용자 이름을 입력해 주세요.</p>
         </div>
 
         <LoginForm onSuccess={() => navigate(redirectPath, { replace: true })} />

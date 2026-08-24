@@ -9,7 +9,7 @@ const navigationItems = [
 ]
 
 export function AppLayout() {
-  const { userId, logout } = useAuth()
+  const { userNm, logout } = useAuth()
   const navigate = useNavigate()
 
   function handleLogout() {
@@ -40,7 +40,7 @@ export function AppLayout() {
           </nav>
 
           <div className="app-user">
-            <span className="app-user__id">사용자 {userId}</span>
+            <span className="app-user__id">사용자 {userNm}</span>
             <button className="app-user__logout" type="button" onClick={handleLogout}>
               로그아웃
             </button>

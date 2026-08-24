@@ -6,11 +6,11 @@ import { ApiError } from '@/shared/api/ApiError'
 import './LoginForm.css'
 
 const loginSchema = z.object({
-  userId: z
+  userNm: z
     .string()
     .trim()
-    .min(1, '사용자 ID를 입력해 주세요.')
-    .regex(/^[1-9]\d*$/, '사용자 ID는 1 이상의 정수여야 합니다.'),
+    .min(1, '사용자 이름을 입력해 주세요.')
+    .max(100, '사용자 이름은 100자 이하여야 합니다.'),
 })
 
 type LoginFormValues = z.infer<typeof loginSchema>
@@ -29,17 +29,17 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      userId: '',
+      userNm: '',
     },
   })
 
-  const submitLogin = handleSubmit(async ({ userId }) => {
+  const submitLogin = handleSubmit(async ({ userNm }) => {
     try {
-      await login(userId)
+      await login(userNm)
       onSuccess()
     } catch (error) {
       if (error instanceof ApiError && (error.status === 400 || error.code === 'USER-001')) {
-        setError('userId', { message: error.message })
+        setError('userNm', { message: error.message })
         return
       }
 
@@ -52,23 +52,22 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
   return (
     <form className="login-form" onSubmit={submitLogin} noValidate>
       <div className="login-form__field">
-        <label className="login-form__label" htmlFor="userId">
-          사용자 ID
+        <label className="login-form__label" htmlFor="userNm">
+          사용자 이름
         </label>
         <input
           className="login-form__input"
-          id="userId"
+          id="userNm"
           type="text"
-          inputMode="numeric"
           autoComplete="username"
-          aria-invalid={Boolean(errors.userId)}
-          aria-describedby={errors.userId ? 'userId-error' : undefined}
-          placeholder="예: 1"
-          {...register('userId')}
+          aria-invalid={Boolean(errors.userNm)}
+          aria-describedby={errors.userNm ? 'userNm-error' : undefined}
+          placeholder="예: seohyeon"
+          {...register('userNm')}
         />
-        {errors.userId && (
-          <p className="login-form__error" id="userId-error" role="alert">
-            {errors.userId.message}
+        {errors.userNm && (
+          <p className="login-form__error" id="userNm-error" role="alert">
+            {errors.userNm.message}
           </p>
         )}
       </div>

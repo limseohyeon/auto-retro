@@ -5,7 +5,8 @@ export type AuthStatus = 'checking' | 'authenticated' | 'anonymous'
 export interface AuthContextValue {
   status: AuthStatus
   userId: string | null
-  login: (userId: string) => Promise<void>
+  userNm: string | null
+  login: (userNm: string) => Promise<void>
   logout: () => void
 }
 

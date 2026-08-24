@@ -1,15 +1,18 @@
-const USER_ID_STORAGE_KEY = 'auto-retro:user-id'
+const USER_NAME_STORAGE_KEY = 'auto-retro:user-name'
+const LEGACY_USER_ID_STORAGE_KEY = 'auto-retro:user-id'
 
 export const authStorage = {
-  getUserId() {
-    return localStorage.getItem(USER_ID_STORAGE_KEY)
+  getUserNm() {
+    return localStorage.getItem(USER_NAME_STORAGE_KEY)
   },
 
-  setUserId(userId: string) {
-    localStorage.setItem(USER_ID_STORAGE_KEY, userId)
+  setUserNm(userNm: string) {
+    localStorage.setItem(USER_NAME_STORAGE_KEY, userNm)
+    localStorage.removeItem(LEGACY_USER_ID_STORAGE_KEY)
   },
 
-  removeUserId() {
-    localStorage.removeItem(USER_ID_STORAGE_KEY)
+  removeUserNm() {
+    localStorage.removeItem(USER_NAME_STORAGE_KEY)
+    localStorage.removeItem(LEGACY_USER_ID_STORAGE_KEY)
   },
 }

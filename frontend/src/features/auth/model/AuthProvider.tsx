@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import type { ReactNode } from 'react'
-import { findUser } from '@/features/auth/api/authApi'
+import { findUserByUserNm } from '@/features/auth/api/authApi'
 import { AuthContext } from '@/features/auth/model/AuthContext'
 import type { AuthStatus } from '@/features/auth/model/AuthContext'
 import { authStorage } from '@/features/auth/model/authStorage'
@@ -13,41 +13,42 @@ interface AuthProviderProps {
 interface AuthState {
   status: AuthStatus
   userId: string | null
+  userNm: string | null
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const queryClient = useQueryClient()
   const [authState, setAuthState] = useState<AuthState>(() => {
-    const storedUserId = authStorage.getUserId()
+    const storedUserNm = authStorage.getUserNm()
 
-    return storedUserId
-      ? { status: 'checking', userId: null }
-      : { status: 'anonymous', userId: null }
+    return storedUserNm
+      ? { status: 'checking', userId: null, userNm: null }
+      : { status: 'anonymous', userId: null, userNm: null }
   })
 
   useEffect(() => {
-    const storedUserId = authStorage.getUserId()
+    const storedUserNm = authStorage.getUserNm()
 
-    if (!storedUserId) {
+    if (!storedUserNm) {
       return
     }
 
-    const userIdToRestore = storedUserId
+    const userNmToRestore = storedUserNm
     const abortController = new AbortController()
 
     async function restoreAuthentication() {
       try {
-        const user = await findUser(userIdToRestore, abortController.signal)
-        authStorage.setUserId(user.userId)
-        setAuthState({ status: 'authenticated', userId: user.userId })
+        const user = await findUserByUserNm(userNmToRestore, abortController.signal)
+        authStorage.setUserNm(user.userNm)
+        setAuthState({ status: 'authenticated', userId: user.userId, userNm: user.userNm })
       } catch (error) {
         if (error instanceof DOMException && error.name === 'AbortError') {
           return
         }
 
-        authStorage.removeUserId()
+        authStorage.removeUserNm()
         queryClient.clear()
-        setAuthState({ status: 'anonymous', userId: null })
+        setAuthState({ status: 'anonymous', userId: null, userNm: null })
       }
     }
 
@@ -57,26 +58,27 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, [queryClient])
 
   const login = useCallback(
-    async (userId: string) => {
-      const user = await findUser(userId)
+    async (userNm: string) => {
+      const user = await findUserByUserNm(userNm)
 
       queryClient.clear()
-      authStorage.setUserId(user.userId)
-      setAuthState({ status: 'authenticated', userId: user.userId })
+      authStorage.setUserNm(user.userNm)
+      setAuthState({ status: 'authenticated', userId: user.userId, userNm: user.userNm })
     },
     [queryClient],
   )
 
   const logout = useCallback(() => {
-    authStorage.removeUserId()
+    authStorage.removeUserNm()
     queryClient.clear()
-    setAuthState({ status: 'anonymous', userId: null })
+    setAuthState({ status: 'anonymous', userId: null, userNm: null })
   }, [queryClient])
 
   const contextValue = useMemo(
     () => ({
       status: authState.status,
       userId: authState.userId,
+      userNm: authState.userNm,
       login,
       logout,
     }),
