@@ -20,10 +20,12 @@ public class UserController {
 
 	private final UserLookupService userLookupService;
 
-	@GetMapping("/{userId}")
-	public ApiResponse<UserResponse> findUser(@PathVariable long userId) {
-		var userInfo = userLookupService.findById(userId);
+    @GetMapping("/{userNm}")
+    public ApiResponse<UserResponse> findUserByUserNm(
+        @PathVariable String userNm
+    ) {
+        var userInfo = userLookupService.findByUserNm(userNm);
 
-		return ApiResponse.success(UserResponse.from(userInfo));
-	}
+        return ApiResponse.success(UserResponse.from(userInfo));
+    }
 }

@@ -23,4 +23,7 @@ public class UserJpaEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
 	private Long id;
+
+	@Column(name = "user_nm", nullable = false, unique = true, length = 10)
+	private String userNm;
 }

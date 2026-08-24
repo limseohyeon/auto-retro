@@ -11,7 +11,7 @@ import com.devlog.auto_retro.user.error.UserErrorCode;
 import lombok.RequiredArgsConstructor;
 
 /**
- * 사용자 ID가 유효하고 실제 저장소에 존재하는지 확인한다.
+ * 사용자 이름이 유효하고 실제 저장소에 존재하는지 확인한다.
  */
 @Service
 @RequiredArgsConstructor
@@ -20,15 +20,17 @@ public class UserLookupService {
 
 	private final UserLookupPort userLookupPort;
 
-	public UserInfo findById(long userId) {
-		if (userId <= 0) {
+	public UserInfo findByUserNm(String userNm) {
+		if (userNm == null || userNm.isBlank()) {
 			throw new BusinessException(CommonErrorCode.INVALID_INPUT);
 		}
 
-		if (!userLookupPort.existsById(userId)) {
-			throw new BusinessException(UserErrorCode.USER_NOT_FOUND);
-		}
+        String normalizedUserNm = userNm.trim();
 
-		return new UserInfo(userId);
+        return userLookupPort.findByUserNm(normalizedUserNm)
+            .orElseThrow(() ->
+                new BusinessException(UserErrorCode.USER_NOT_FOUND)
+            );
+
 	}
 }
