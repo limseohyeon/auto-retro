@@ -1,4 +1,4 @@
-package com.devlog.auto_retro.user.adapter.in.web;
+package com.devlog.auto_retro.user.adapter.in.web.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devlog.auto_retro.common.api.ApiResponse;
-import com.devlog.auto_retro.user.application.UserLookupService;
+import com.devlog.auto_retro.user.adapter.in.web.response.UserResponse;
+import com.devlog.auto_retro.user.application.service.UserLookupService;
 import lombok.RequiredArgsConstructor;
 
 /**

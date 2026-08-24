@@ -1,10 +1,11 @@
-package com.devlog.auto_retro.user.application;
+package com.devlog.auto_retro.user.application.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devlog.auto_retro.common.error.BusinessException;
 import com.devlog.auto_retro.common.error.CommonErrorCode;
+import com.devlog.auto_retro.user.application.dto.UserInfo;
 import com.devlog.auto_retro.user.application.port.out.UserLookupPort;
 import com.devlog.auto_retro.user.error.UserErrorCode;
 import lombok.RequiredArgsConstructor;

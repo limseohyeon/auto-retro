@@ -1,6 +1,6 @@
-package com.devlog.auto_retro.user.adapter.in.web;
+package com.devlog.auto_retro.user.adapter.in.web.response;
 
-import com.devlog.auto_retro.user.application.UserInfo;
+import com.devlog.auto_retro.user.application.dto.UserInfo;
 
 /**
  * 사용자 조회 API의 응답 데이터다.

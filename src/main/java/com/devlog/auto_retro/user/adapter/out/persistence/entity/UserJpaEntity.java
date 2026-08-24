@@ -1,4 +1,4 @@
-package com.devlog.auto_retro.user.adapter.out.persistence;
+package com.devlog.auto_retro.user.adapter.out.persistence.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

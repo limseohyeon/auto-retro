@@ -1,5 +1,6 @@
-package com.devlog.auto_retro.user.adapter.out.persistence;
+package com.devlog.auto_retro.user.adapter.out.persistence.repository;
 
+import com.devlog.auto_retro.user.adapter.out.persistence.entity.UserJpaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

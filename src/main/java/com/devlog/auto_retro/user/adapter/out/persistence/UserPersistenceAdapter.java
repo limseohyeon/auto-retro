@@ -1,5 +1,6 @@
 package com.devlog.auto_retro.user.adapter.out.persistence;
 
+import com.devlog.auto_retro.user.adapter.out.persistence.repository.UserJpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.devlog.auto_retro.user.application.port.out.UserLookupPort;

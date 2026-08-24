@@ -1,4 +1,4 @@
-package com.devlog.auto_retro.user.application;
+package com.devlog.auto_retro.user.application.dto;
 
 /**
  * 조회된 사용자 정보를 애플리케이션 계층에 전달한다.
