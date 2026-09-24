@@ -2,7 +2,6 @@ package com.devlog.auto_retro.devrecord.application.service;
 
 import com.devlog.auto_retro.devrecord.application.dto.DevRecordCreateCommand;
 import com.devlog.auto_retro.devrecord.application.port.out.DevRecordSavePort;
-import com.devlog.auto_retro.user.application.service.UserLookupService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
