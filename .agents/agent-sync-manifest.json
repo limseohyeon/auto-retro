@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "pairs": {
+    "AGENTS.ko.md": {
+      "target": "AGENTS.md",
+      "sourceSha256": "fbbe943db4711ccc23ef5fc0ec89d58cddce235062ae5d85423ea0b2db0730c1",
+      "targetSha256": "b302bd826445fb364e6b6de59d77fb6525faed0a1740a0bf8c3f1b261fb70d04"
+    },
+    "docs/exec-plans/AGENTS.ko.md": {
+      "target": "docs/exec-plans/AGENTS.md",
+      "sourceSha256": "1dcb136aecb57744073f686546bda51c4ace18e6bca4761ae9939d7c6de4e56e",
+      "targetSha256": "59f92d970ffe926f332a643b010b97124efb23290cd9df3d54e300c89dc816fa"
+    },
+    "frontend/AGENTS.ko.md": {
+      "target": "frontend/AGENTS.md",
+      "sourceSha256": "0cf3a78ba54e5546b94f39ef14d707a372a2fd13292a8ca4dc6069854577761d",
+      "targetSha256": "adb32524bc281cf6a7ede0757bfacbf3bcde6ccf0b67a9cff65050cad18f4ac0"
+    },
+    "src/main/java/com/devlog/auto_retro/AGENTS.ko.md": {
+      "target": "src/main/java/com/devlog/auto_retro/AGENTS.md",
+      "sourceSha256": "24f35c8e9113413b3ccb6c637f58c9176d5e8311ec275c2103e5376fd777ff46",
+      "targetSha256": "b7b6a2edf0c92312455cb013f9cf4ca5827c9c3575106c01009efc13ce86167a"
+    },
+    "src/main/resources/db/migration/AGENTS.ko.md": {
+      "target": "src/main/resources/db/migration/AGENTS.md",
+      "sourceSha256": "03cac397782a496815d9821588308e1911eab5886acc431f8a98d272ec69b5f3",
+      "targetSha256": "869d8d367b79515522fd6c791469538787139d99343cdd1d8e66fddb42488ee3"
+    }
+  }
+}
