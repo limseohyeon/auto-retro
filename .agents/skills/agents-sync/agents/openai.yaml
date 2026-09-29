@@ -1,6 +1,0 @@
-interface:
-  display_name: "Agents Sync"
-  short_description: "Sync Korean AGENTS sources to English outputs"
-  default_prompt: "Use $agents-sync to translate changed AGENTS.ko.md sections into AGENTS.md and verify synchronization."
-policy:
-  allow_implicit_invocation: false
