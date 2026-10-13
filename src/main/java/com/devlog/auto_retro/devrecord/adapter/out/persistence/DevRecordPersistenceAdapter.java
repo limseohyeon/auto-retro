@@ -3,13 +3,16 @@ package com.devlog.auto_retro.devrecord.adapter.out.persistence;
 import com.devlog.auto_retro.devrecord.adapter.out.persistence.entity.DevRecordJpaEntity;
 import com.devlog.auto_retro.devrecord.adapter.out.persistence.repository.DevRecordJpaRepository;
 import com.devlog.auto_retro.devrecord.application.dto.DevRecordCreateCommand;
+import com.devlog.auto_retro.devrecord.application.dto.DevRecordDetail;
+import com.devlog.auto_retro.devrecord.application.port.out.DevRecordLoadPort;
 import com.devlog.auto_retro.devrecord.application.port.out.DevRecordSavePort;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class DevRecordPersistenceAdapter implements DevRecordSavePort {
+public class DevRecordPersistenceAdapter implements DevRecordSavePort, DevRecordLoadPort {
 
     private final DevRecordJpaRepository devRecordJpaRepository;
 
@@ -29,5 +32,21 @@ public class DevRecordPersistenceAdapter implements DevRecordSavePort {
         return devRecordJpaRepository
             .save(entity)
             .getId();
+    }
+
+    @Override
+    public Optional<DevRecordDetail> loadDetail(long recordId) {
+        return devRecordJpaRepository.findById(recordId)
+            .map(entity -> new DevRecordDetail(
+                entity.getId(),
+                entity.getUserId(),
+                entity.getTitle(),
+                entity.getWorkContent(),
+                entity.getProblemContent(),
+                entity.getSolutionContent(),
+                entity.getLearnedContent(),
+                entity.getStatus(),
+                entity.getRecordDate()
+            ));
     }
 }
