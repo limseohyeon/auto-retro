@@ -3,8 +3,34 @@ package com.devlog.auto_retro.devrecord.error;
 import com.devlog.auto_retro.common.error.ErrorCode;
 
 /**
- * 개발 기록 모듈이 소유하는 오류 코드의 확장 지점이다.
- * 실제 오류를 정의할 때 enum으로 전환해 {@link ErrorCode}를 구현한다.
+ * 개발 기록 모듈에서 발생하는 오류를 정의한다.
  */
-public abstract class DevRecordErrorCode implements ErrorCode {
+public enum DevRecordErrorCode implements ErrorCode {
+
+	RECORD_NOT_FOUND(404, "RECORD-001", "개발 기록을 찾을 수 없습니다.");
+
+	private final int status;
+	private final String code;
+	private final String message;
+
+	DevRecordErrorCode(int status, String code, String message) {
+		this.status = status;
+		this.code = code;
+		this.message = message;
+	}
+
+	@Override
+	public int status() {
+		return status;
+	}
+
+	@Override
+	public String code() {
+		return code;
+	}
+
+	@Override
+	public String message() {
+		return message;
+	}
 }
