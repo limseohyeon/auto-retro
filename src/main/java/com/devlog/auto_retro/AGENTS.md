@@ -24,6 +24,63 @@ Cross-module data flow is `user -> devrecord -> aigeneration -> weeklyreport -> 
 
 ## Implementation Patterns
 
+### Minimize Java Boilerplate
+
+- Generate mechanically repetitive constructors, accessors, and logger declarations with Java 21 language features or Lombok.
+- Prefer Java `record` over a regular class for immutable data carriers, commands, responses, and value objects.
+- Use `final` fields and `@RequiredArgsConstructor` for constructor injection in Spring components.
+- Use `@RequiredArgsConstructor` for constructors and `@Getter` for required accessors in simple immutable classes and enums.
+- When an interface requires a fluent accessor such as `status()`, add `@Accessors(fluent = true)`.
+- Use `@Slf4j` instead of declaring loggers manually.
+- Do not use `@Data`, class-level `@Setter`, or indiscriminate `@AllArgsConstructor`.
+- Use `@Builder` only for objects with many optional fields, and never bypass required creation steps or domain invariants.
+- Write constructors and accessors explicitly when they require validation, normalization, defensive copies, or additional behavior.
+- Do not apply `@Data`, class-level `@Setter`, or generation of `equals`, `hashCode`, and `toString` over every field to JPA entities.
+
+Standard immutable DTO:
+
+```java
+public record RawTag(String name, String category) {
+}
+```
+
+Standard constructor injection:
+
+```java
+@Service
+@RequiredArgsConstructor
+public class TaggingService {
+
+    private final TagGenerationPort generationPort;
+    private final TagSavePort savePort;
+}
+```
+
+Standard enum implementing a fluent contract:
+
+```java
+@Getter
+@Accessors(fluent = true)
+@RequiredArgsConstructor
+public enum ExampleErrorCode implements ErrorCode {
+
+    RESOURCE_NOT_FOUND(404, "EXAMPLE-001", "요청한 리소스를 찾을 수 없습니다.");
+
+    private final int status;
+    private final String code;
+    private final String message;
+}
+```
+
+Standard logger declaration:
+
+```java
+@Slf4j
+@Component
+public class AiGenerationAdapter {
+}
+```
+
 ### Package and Dependency Direction
 
 Use the following structure only as needed; do not create empty layers.

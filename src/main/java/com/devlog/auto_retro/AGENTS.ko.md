@@ -24,6 +24,63 @@ Cross-module data flow는 `user -> devrecord -> aigeneration -> weeklyreport -> 
 
 ## 구현 패턴
 
+### Java 반복 코드 최소화
+
+- 기계적으로 반복되는 생성자, accessor와 logger 선언은 Java 21 language feature 또는 Lombok으로 생성합니다.
+- 불변 data carrier, command, response와 value object는 일반 class보다 Java `record`를 우선합니다.
+- Spring component의 constructor injection은 `final` field와 `@RequiredArgsConstructor`를 사용합니다.
+- 단순 불변 class와 enum의 constructor는 `@RequiredArgsConstructor`, 필요한 accessor는 `@Getter`를 사용합니다.
+- Interface가 `status()`처럼 fluent accessor를 요구할 때만 `@Accessors(fluent = true)`를 함께 사용합니다.
+- Logger는 직접 선언하지 않고 `@Slf4j`를 사용합니다.
+- `@Data`, class-level `@Setter`와 무분별한 `@AllArgsConstructor`는 사용하지 않습니다.
+- `@Builder`는 선택적 field가 많은 객체에만 사용하며 필수 생성 절차나 domain invariant를 우회하지 않습니다.
+- Validation, normalization, defensive copy 또는 부가 동작이 필요한 constructor와 accessor는 직접 작성합니다.
+- JPA entity에는 `@Data`, class-level `@Setter` 또는 모든 field를 포함하는 `equals`, `hashCode`, `toString` 생성을 적용하지 않습니다.
+
+표준 불변 DTO:
+
+```java
+public record RawTag(String name, String category) {
+}
+```
+
+표준 constructor injection:
+
+```java
+@Service
+@RequiredArgsConstructor
+public class TaggingService {
+
+    private final TagGenerationPort generationPort;
+    private final TagSavePort savePort;
+}
+```
+
+Fluent contract를 구현하는 표준 enum:
+
+```java
+@Getter
+@Accessors(fluent = true)
+@RequiredArgsConstructor
+public enum ExampleErrorCode implements ErrorCode {
+
+    RESOURCE_NOT_FOUND(404, "EXAMPLE-001", "요청한 리소스를 찾을 수 없습니다.");
+
+    private final int status;
+    private final String code;
+    private final String message;
+}
+```
+
+표준 logger 선언:
+
+```java
+@Slf4j
+@Component
+public class AiGenerationAdapter {
+}
+```
+
 ### Package와 의존성 방향
 
 다음 구조는 필요한 경우에만 사용하며 빈 layer를 만들지 않습니다.
