@@ -18,8 +18,8 @@
     },
     "src/main/java/com/devlog/auto_retro/AGENTS.ko.md": {
       "target": "src/main/java/com/devlog/auto_retro/AGENTS.md",
-      "sourceSha256": "24f35c8e9113413b3ccb6c637f58c9176d5e8311ec275c2103e5376fd777ff46",
-      "targetSha256": "b7b6a2edf0c92312455cb013f9cf4ca5827c9c3575106c01009efc13ce86167a"
+      "sourceSha256": "0df3fe19e6cb068c8e12c014621773eba52ed65cd0a8dfcbe59c418ba30f02ad",
+      "targetSha256": "0eda831eec5278d1e081efb92f8eb7d49dae5b2d73ce3cf0f601600201aef7b1"
     },
     "src/main/resources/db/migration/AGENTS.ko.md": {
       "target": "src/main/resources/db/migration/AGENTS.md",

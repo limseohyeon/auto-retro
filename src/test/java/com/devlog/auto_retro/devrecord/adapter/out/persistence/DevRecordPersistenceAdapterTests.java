@@ -2,6 +2,7 @@ package com.devlog.auto_retro.devrecord.adapter.out.persistence;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.devlog.auto_retro.TestcontainersConfiguration;
 import com.devlog.auto_retro.devrecord.adapter.out.persistence.entity.DevRecordJpaEntity;
 import com.devlog.auto_retro.devrecord.adapter.out.persistence.repository.DevRecordJpaRepository;
 import com.devlog.auto_retro.devrecord.application.dto.DevRecordSearchCondition;
@@ -13,13 +14,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
-import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.core.simple.JdbcClient;
+import org.springframework.test.context.ActiveProfiles;
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Import(DevRecordPersistenceAdapter.class)
+@ActiveProfiles("test")
+@Import({DevRecordPersistenceAdapter.class, TestcontainersConfiguration.class})
 class DevRecordPersistenceAdapterTests {
 
     @Autowired

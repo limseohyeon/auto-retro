@@ -75,6 +75,7 @@ class RepositoryDocumentationTests {
         String relative = repositoryRoot.relativize(path).toString().replace('\\', '/');
         return !relative.startsWith(".git/")
             && !relative.startsWith(".gradle/")
+            && !relative.startsWith(".local/")
             && !relative.startsWith("build/")
             && !relative.startsWith("node_modules/")
             && !relative.contains("/node_modules/");
