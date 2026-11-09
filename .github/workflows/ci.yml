@@ -17,28 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
-    services:
-      postgres:
-        image: postgres:17-alpine
-        env:
-          POSTGRES_DB: auto_retro_test
-          POSTGRES_USER: auto_retro
-          POSTGRES_PASSWORD: test-password
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd="pg_isready -U auto_retro -d auto_retro_test"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=10
-
-    env:
-      SPRING_PROFILES_ACTIVE: test
-      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/auto_retro_test
-      SPRING_DATASOURCE_USERNAME: auto_retro
-      SPRING_DATASOURCE_PASSWORD: test-password
-      SPRING_BATCH_JDBC_INITIALIZE_SCHEMA: always
-
     steps:
       - name: Checkout source
         uses: actions/checkout@v6
