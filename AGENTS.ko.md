@@ -72,6 +72,7 @@ Unix에서는 `./gradlew`를 사용하고 CI에서는 `./gradlew verifyAll --no-
 - 외부 AI integration을 추가할 때는 승인된 vendor의 공식 유지보수 SDK를 사용하고 outbound adapter에 격리합니다.
 - 영향받은 package 옆에 focused test를 추가하고 완료 전에 `verifyAll`을 실행합니다.
 - 변경이 여러 module, migration, external integration 또는 여러 작업 session에 걸치면 architecture documentation과 execution plan을 갱신합니다.
+- 장기 기준은 담당 architecture 또는 design document 한 곳에 기록하고 다른 문서에서는 해당 기준을 link합니다.
 
 ### 하지 말아야 할 일
 
@@ -91,6 +92,8 @@ Unix에서는 `./gradlew`를 사용하고 CI에서는 `./gradlew verifyAll --no-
 5. 가장 좁은 관련 check를 먼저 실행한 뒤 완료를 선언하기 전에 `verifyAll`을 실행합니다.
 6. 변경된 동작, migration 또는 configuration, 검증 결과와 해결되지 않은 risk를 보고합니다.
 
+Execution plan은 모든 활동을 기록하는 일지가 아니라 다음 session이 재개하는 데 필요한 현재 상태, 결정, 검증 결과와 다음 시작점을 보존합니다. 작은 변경은 Git, issue와 pull request 이력으로 관리하며 별도 plan을 만들지 않습니다. 완료된 plan은 최종 결과, 장기 결정, 검증과 남은 risk 중심으로 압축한 뒤 `completed/`로 이동합니다.
+
 ## 표준과 참고 문서
 
 - [`.editorconfig`](./.editorconfig)를 따릅니다. UTF-8, batch file 외에는 LF, final newline, Java/Gradle은 four spaces, YAML은 two spaces를 사용합니다.
@@ -102,7 +105,9 @@ Unix에서는 `./gradlew`를 사용하고 CI에서는 `./gradlew verifyAll --no-
 
 ### Git과 Pull Request
 
-- 끝에 마침표 없이 `type: concise subject` 형식을 사용합니다.
+- commit 제목은 끝에 마침표 없이 `type: concise subject` 형식을 사용합니다.
+- issue 제목은 `[영역] 간결한 작업 제목` 형식을 사용합니다(예: `[BE] 태그 생성 기능 구현`).
+- pull request 제목은 템플릿의 `[feat] 제목` 형식을 따르며, 변경 유형에 맞게 `feat`를 허용된 type으로 바꿉니다(예: `[docs] 백엔드 포트와 어댑터 패키지 규칙 명시`).
 - 일반적으로 허용하는 type은 `feat`, `fix`, `docs`, `test`, `refactor`, `move`, `chore`입니다.
 - 각 commit에는 하나의 논리적 변경만 포함합니다.
 - Pull request에는 동작 설명, issue가 있으면 link, 실행한 verification을 포함하고 migration, configuration change, screenshot, reviewer focus area를 명시합니다.

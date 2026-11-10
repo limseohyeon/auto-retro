@@ -72,6 +72,7 @@ On Unix, use `./gradlew`; CI uses `./gradlew verifyAll --no-daemon`. Backend int
 - Use an approved vendor's official maintained SDK when adding an external AI integration, and isolate it in an outbound adapter.
 - Add focused tests beside the affected package, then run `verifyAll` before completion.
 - Update architecture documentation and an execution plan when a change spans modules, migrations, external integrations, or multiple work sessions.
+- Record long-term guidance in one owning architecture or design document and link to that source from other documents.
 
 ### Don'ts
 
@@ -91,6 +92,8 @@ On Unix, use `./gradlew`; CI uses `./gradlew verifyAll --no-daemon`. Backend int
 5. Run the narrowest relevant checks, then `verifyAll` before declaring completion.
 6. Report changed behavior, migrations or configuration, verification results, and any unresolved risk.
 
+An execution plan is not a log of every activity. It preserves the current state, decisions, verification results, and next starting point required for the next session to resume. Manage small changes through Git, issue, and pull request history without creating a separate plan. Before moving a completed plan to `completed/`, condense it around the final result, long-term decisions, verification, and remaining risks.
+
 ## Standards & References
 
 - Follow [`.editorconfig`](./.editorconfig): UTF-8, final newline, LF except batch files, four spaces for Java/Gradle, and two spaces for YAML.
@@ -102,7 +105,9 @@ On Unix, use `./gradlew`; CI uses `./gradlew verifyAll --no-daemon`. Backend int
 
 ### Git and Pull Requests
 
-- Use `type: concise subject` without a trailing period.
+- Use `type: concise subject` without a trailing period for commit subjects.
+- Use `[영역] 간결한 작업 제목` for issue titles (for example, `[BE] 태그 생성 기능 구현`).
+- Follow the template's `[feat] 제목` format for pull request titles, replacing `feat` with the allowed type matching the change (for example, `[docs] 백엔드 포트와 어댑터 패키지 규칙 명시`).
 - Allowed common types are `feat`, `fix`, `docs`, `test`, `refactor`, `move`, and `chore`.
 - Keep each commit to one logical change.
 - Pull requests must describe behavior, link the issue when one exists, list verification, and call out migrations, configuration changes, screenshots, and reviewer focus areas.

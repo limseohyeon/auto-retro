@@ -5,7 +5,7 @@
 Execution plan은 여러 module에 걸치거나 schema migration 또는 external integration을 포함하거나 여러 작업 session 동안 계속되는 변경의 결정과 진행 상태를 보존합니다. 작은 local edit에는 plan이 필요하지 않습니다.
 
 - 진행 중인 plan은 `active/`에 둡니다.
-- Implementation과 verification이 끝난 뒤에만 완료된 plan을 `completed/`로 이동합니다.
+- Implementation과 verification이 끝난 뒤 plan을 완료 형식으로 압축한 경우에만 `completed/`로 이동합니다.
 - `YYYY-MM-DD-short-topic.ko.md` filename을 사용합니다.
 - `README.md`의 필수 section을 따릅니다.
 
@@ -22,13 +22,17 @@ Execution plan은 여러 module에 걸치거나 schema migration 또는 external
 
 1. User-visible goal과 측정 가능한 completion criteria.
 2. 포함하거나 제외하는 scope.
-3. 관련 code, test, schema, documentation link를 포함한 current state.
-4. 독립적으로 검증할 수 있는 작고 순서가 있는 task.
-5. 관련된 경우 rationale과 rejected alternative를 포함한 날짜별 decision.
-6. 정확한 automated command와 필요한 manual scenario.
-7. Completed work, failure, discovery, 다음 starting point를 포함한 날짜별 progress log.
+3. 완료, 진행 중, 남은 작업으로 구분한 current state.
+4. 다음 session이 가장 먼저 확인할 file, command와 task를 담은 next starting point.
+5. 관련 code, test, schema, documentation link를 포함한 verified evidence.
+6. 독립적으로 검증할 수 있는 작고 순서가 있는 task.
+7. 관련된 경우 rationale과 rejected alternative를 포함한 날짜별 decision.
+8. 정확한 automated command와 필요한 manual scenario.
+9. 의미 있는 state change, failure, discovery와 다음 starting point만 포함한 날짜별 progress log.
 
-Implementation 중에 plan을 갱신하며 마지막에만 갱신하지 않습니다. Evidence로 design이 바뀌면 task list를 수정하고 decision을 기록합니다.
+Implementation 중에 plan을 갱신하며 마지막에만 갱신하지 않습니다. Evidence로 design이 바뀌면 current state, task list, decision과 next starting point를 수정합니다. 활동 순서가 아니라 다른 engineer가 재개하는 데 필요한 상태를 기록합니다.
+
+완료된 plan에는 최종 결과, 주요 변경 범위, 장기 결정, 최종 검증, 남은 위험과 후속 작업만 보존합니다. 해결된 중간 상태, 세션 재개 지침과 반복 검증은 제거합니다.
 
 ## 테스트 전략
 
@@ -45,12 +49,14 @@ Implementation 중에 plan을 갱신하며 마지막에만 갱신하지 않습�
 
 - 다른 engineer가 다음 unchecked item부터 재개할 수 있을 만큼 plan을 최신 상태로 유지합니다.
 - 큰 excerpt를 복사하지 말고 claim을 code 또는 executable configuration에 link합니다.
+- Architecture 또는 design 기준을 plan에 복사하지 말고 담당 문서에 link합니다.
 - Migration, configuration change, rollout order, recovery, reviewer focus를 명시적으로 기록합니다.
 - Current plan을 완료하기 전에 follow-up debt를 별도 issue 또는 plan으로 분리합니다.
 
 ### 하지 말아야 할 일
 
 - Plan을 speculative backlog나 daily activity log로 사용하지 않습니다.
+- File open, search, 결과에 영향이 없는 시행착오, 반복된 성공 command 또는 원본 log 전체를 기록하지 않습니다.
 - 명시한 verification이 통과하기 전에 work를 complete로 표시하지 않습니다.
 - Future work에 필요한 failed approach나 decision history를 지우지 않습니다.
 - Required work 또는 알려진 blocking risk가 남아 있는 동안 plan을 `completed/`로 이동하지 않습니다.

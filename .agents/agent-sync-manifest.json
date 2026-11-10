@@ -3,13 +3,13 @@
   "pairs": {
     "AGENTS.ko.md": {
       "target": "AGENTS.md",
-      "sourceSha256": "fbbe943db4711ccc23ef5fc0ec89d58cddce235062ae5d85423ea0b2db0730c1",
-      "targetSha256": "b302bd826445fb364e6b6de59d77fb6525faed0a1740a0bf8c3f1b261fb70d04"
+      "sourceSha256": "b5597374878b0d26f7a15c0154d7d75b48717ebc6854d3b7b989e25306ad847b",
+      "targetSha256": "b8695f12b298ba22880c83f706a5fc5653bcb97a4489e5a60162586022b3ec37"
     },
     "docs/exec-plans/AGENTS.ko.md": {
       "target": "docs/exec-plans/AGENTS.md",
-      "sourceSha256": "1dcb136aecb57744073f686546bda51c4ace18e6bca4761ae9939d7c6de4e56e",
-      "targetSha256": "59f92d970ffe926f332a643b010b97124efb23290cd9df3d54e300c89dc816fa"
+      "sourceSha256": "f5790b47fddb2254ebb2aab657373e696bf8f59e89469972c29de0121ad60084",
+      "targetSha256": "094b2719d340aa7d3cabf1211256d0698e02a4659786ae6d801af9fd3c4cdfd5"
     },
     "frontend/AGENTS.ko.md": {
       "target": "frontend/AGENTS.md",
