@@ -100,9 +100,14 @@ public class AiGenerationAdapter {
   error
 ```
 
-- Inbound adapter는 transport data를 검증하고 변환한 뒤 application use case를 호출합니다.
-- Application service는 business rule을 조정하고 자신이 소유한 outbound port interface에 의존합니다.
-- Outbound adapter는 port를 구현하고 persistence 또는 provider model을 application/domain type으로 mapping합니다.
+- `in`과 `out`은 담당 모듈을 기준으로 정합니다. 먼저 호출자와 필요한 기능을 확인한 뒤 다음 위치를 선택합니다.
+  - HTTP 요청을 받으면 `adapter/in/web`에서 입력을 검증·변환하고 유스케이스를 호출합니다.
+  - 호출자에게 제공할 유스케이스 계약은 `application/port/in`에 둡니다. `application/service`에서 계약을 구현하고 업무 흐름을 조정합니다.
+  - 서비스가 DB 조회나 AI 호출을 요청하면 서비스에 필요한 계약을 `application/port/out`에 둡니다. `adapter/out`에서 이를 구현하고 저장소·공급자 타입을 애플리케이션 타입으로 변환합니다.
+  - 다른 모듈이 호출할 계약과 불변 DTO만 명시적으로 공개합니다. 하위 패키지를 공개할 때는 전용 패키지의 `package-info.java`에 `@NamedInterface`를 선언하고 내부 DTO, 출력 포트, 서비스 구현체는 내부에 유지합니다.
+- 개발 기록 조회의 호출 예시:
+  - HTTP 요청: `DevRecordController` → 상세 조회 서비스 → `DevRecordLoadPort` → `DevRecordPersistenceAdapter`.
+  - 모듈 간 조회 설계 예시: 태그 생성 서비스 → 공개 입력 포트 `DevRecordSourceQuery` → 구현 서비스 → 내부 `DevRecordLoadPort`. 구현 서비스는 사용자 소유권을 확인한 뒤 공개 DTO를 반환합니다.
 - 실제 boundary 또는 substitution point에만 interface를 만듭니다. 단순한 module-local CRUD는 간결하게 유지할 수 있습니다.
 - module responsibility나 exposed contract가 바뀌면 `package-info.java`를 정확하게 갱신합니다.
 

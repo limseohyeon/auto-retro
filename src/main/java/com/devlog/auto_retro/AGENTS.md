@@ -100,9 +100,14 @@ Use the following structure only as needed; do not create empty layers.
   error
 ```
 
-- Inbound adapters validate and translate transport data, then call an application use case.
-- Application services coordinate business rules and depend on outbound port interfaces they own.
-- Outbound adapters implement those ports and map persistence or provider models to application/domain types.
+- Interpret `in` and `out` from the owning module's perspective. Identify the caller and the capability it needs, then choose the package:
+  - For HTTP requests, validate and translate input in `adapter/in/web` and call the use case.
+  - Put a use case contract offered to callers in `application/port/in`. Implement the contract and coordinate the workflow in `application/service`.
+  - When a service needs a database query or an AI call, define the contract it needs in `application/port/out`. Implement it in `adapter/out` and map persistence or provider types to application types.
+  - Explicitly expose only the contracts and immutable DTOs needed by other modules. Use the dedicated subpackage's `package-info.java` to expose it with `@NamedInterface`. Keep internal DTOs, outbound ports, and service implementations private to the module.
+- Development record query examples:
+  - HTTP request: `DevRecordController` → detail query service → `DevRecordLoadPort` → `DevRecordPersistenceAdapter`.
+  - Example cross-module design: tag generation service → public inbound port `DevRecordSourceQuery` → implementing service → internal `DevRecordLoadPort`. The implementing service checks user ownership before returning the public DTO.
 - Create an interface only at a real boundary or substitution point. Direct, module-local CRUD may remain simple.
 - Keep `package-info.java` accurate when a module's responsibility or exposed contract changes.
 
